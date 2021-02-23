@@ -1,14 +1,24 @@
 # Kairos
 A Framework for testing API in golang.
 
+## How to install
+`go get github.com/KummerCompany/kairos`
+
+
 ## Example
 ```go
+
+import (
+	"github.com/KummerCompany/kairos"
+	kairoRepo "github.com/KummerCompany/kairos/repositories"
+	)
+	
 func TestAPI(t *testing.T) {
 
-	testAPI := test.NewTestingAPI()
+	testAPI := kairoRepo.NewTestingAPI()
 
 	testAPI.Description("Testing GET API",
-		test.Before{
+		kairos.Before{
 			Method: "GET",
 			URL:    "/api/video/251252",
 			Body:   nil,
@@ -18,10 +28,10 @@ func TestAPI(t *testing.T) {
 				}, nil)
 			},
 		},
-		test.Test{
+		kairos.Test{
 			Controller: controllers.GetVideo,
 		},
-		test.After{
+		kairos.After{
 			AfterFunc:  nil,
 			StatusCode: 200,
 			Want: map[string]interface{}{
