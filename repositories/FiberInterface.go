@@ -19,6 +19,10 @@ func NewFiberTestAPI() kairos.TestingInterface {
 	return &fiberTesting{}
 }
 
+// Escenario is the name of the test.
+// Before is a struct that implements all configuration before test exect.
+// Test required the controller that you whould like to test
+// After is all configurations after exec the test case.
 func (*fiberTesting) Description(escenario string, before kairos.Before, test kairos.Test, after kairos.After, t *testing.T) {
 
 	c := pkg.ColorsPrint{}
