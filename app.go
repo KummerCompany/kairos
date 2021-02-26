@@ -21,7 +21,8 @@ type Before struct {
 	Method string
 	// URL that you will testing. e.g. /api/videos
 	URL string
-	// Body is the json that you will be send. e.g. { "name": "john" }
+	// Body is the json that you will be send.
+	// e.g. { "name": "john" }
 	Body map[string]interface{}
 	// BeforeFunc configuration before run test, such as external agents instance, set Headeres, etc.
 	// e.g.: request.Header.Set("Content-Type", "application/json")
