@@ -9,8 +9,10 @@ import (
 )
 
 // Equal : Compare two values, that you would like to recibe and you recibe.
-func Equal(got, want interface{}, t *testing.T) {
+func Equal(got, want interface{}, description string, t *testing.T) {
 	c := pkg.ColorsPrint{}
+
+	c.Cyan("Assert Eqaul" + description)
 
 	typeGot := reflect.TypeOf(got)
 	typeWant := reflect.TypeOf(want)
@@ -18,18 +20,17 @@ func Equal(got, want interface{}, t *testing.T) {
 	valueWant := reflect.ValueOf(want)
 
 	if typeGot != typeWant {
-		c.Red(fmt.Sprintf("\n\tI recibe",typeGot))
-		c.Red(fmt.Sprintf("\n\tBut I want",typeWant))
+		c.Red(fmt.Sprintf("\n\tI recibe", typeGot))
+		c.Red(fmt.Sprintf("\n\tBut I want", typeWant))
 		t.Fail()
 		return
 	}
 	if valueGot != valueWant {
-		c.Red(fmt.Sprintf("\n\tI recibe",valueGot))
-		c.Red(fmt.Sprintf("\n\tBut I want")
-		fmt.Println(valueWant)
+		c.Red(fmt.Sprintf("\n\tI recibe", valueGot))
+		c.Red(fmt.Sprintf("\n\tBut I want", valueWant))
 		t.Fail()
 		return
 	}
 
-	c.Green("\n\tBoth values are equals")
+	c.Green("\n\t I recibe " + valueGot.String())
 }
