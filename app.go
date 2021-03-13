@@ -1,12 +1,9 @@
 package kairos
 
 import (
-	"fmt"
 	"net/http"
-	"reflect"
 	"testing"
 
-	"github.com/KummerCompany/kairos/pkg"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -44,36 +41,4 @@ type After struct {
 	StatusCode int
 	// JSON that you would like to recibe for testing.
 	Want map[string]interface{}
-}
-
-// Assert struct
-type Assert struct{}
-
-// Equal : Compare two values, that you would like to recibe and you recibe.
-func (*Assert) Equal(got, want interface{}, t *testing.T) {
-	c := pkg.ColorsPrint{}
-
-	typeGot := reflect.TypeOf(got)
-	typeWant := reflect.TypeOf(want)
-	valueGot := reflect.ValueOf(got)
-	valueWant := reflect.ValueOf(want)
-
-	if typeGot != typeWant {
-		c.Red("\n\tI recibe")
-		fmt.Println(typeGot)
-		c.Red("\n\tBut I want")
-		fmt.Println(typeWant)
-		t.Fail()
-		return
-	}
-	if valueGot != valueWant {
-		c.Red("\n\tI recibe")
-		fmt.Println(valueGot)
-		c.Red("\n\tBut I want")
-		fmt.Println(valueWant)
-		t.Fail()
-		return
-	}
-
-	c.Green("\n\tBoth values are equals")
 }
