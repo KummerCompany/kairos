@@ -44,7 +44,7 @@ func (*fiberTesting) Description(escenario string, before kairos.Before, test ka
 
 	body, _ := json.Marshal(before.Body)
 
-	request := httptest.NewRequest(before.Method, before.URL, bytes.NewBuffer(body))
+	request := httptest.NewRequest(before.Method, test.URL, bytes.NewBuffer(body))
 
 	request.Header.Set("Content-Type", "application/json")
 

@@ -12,25 +12,52 @@ import (
 func Equal(got, want interface{}, description string, t *testing.T) {
 	c := pkg.ColorsPrint{}
 
-	c.Cyan("Assert Eqaul" + description)
+	c.Cyan("Assert Equal " + description)
 
 	typeGot := reflect.TypeOf(got)
 	typeWant := reflect.TypeOf(want)
-	valueGot := reflect.ValueOf(got)
-	valueWant := reflect.ValueOf(want)
 
 	if typeGot != typeWant {
-		c.Red(fmt.Sprintf("\n\tI recibe", typeGot))
-		c.Red(fmt.Sprintf("\n\tBut I want", typeWant))
-		t.Fail()
-		return
-	}
-	if valueGot != valueWant {
-		c.Red(fmt.Sprintf("\n\tI recibe", valueGot))
-		c.Red(fmt.Sprintf("\n\tBut I want", valueWant))
+		c.Red(fmt.Sprint("\n\tI recibe", typeGot))
+		c.Red(fmt.Sprint("\n\tBut I want", typeWant))
 		t.Fail()
 		return
 	}
 
-	c.Green("\n\t I recibe " + valueGot.String())
+	if want != got {
+		c.Red(fmt.Sprint("\n\tI recibe", got))
+		c.Red(fmt.Sprint("\n\tBut I want", want))
+		t.Fail()
+		return
+	}
+
+	c.Green(fmt.Sprint("\n\t I recibe ", want))
+}
+
+func isNil(got interface{}, description string, t *testing.T) {
+	c := pkg.ColorsPrint{}
+
+	c.Cyan("Assert Nil " + description)
+
+	if !reflect.ValueOf(got).IsNil() {
+		c.Red(fmt.Sprint("\n\tI recibe", got))
+		t.Fail()
+		return
+	}
+
+	c.Green("\n\t I recibe a nil value")
+}
+
+func isNotNil(got interface{}, description string, t *testing.T) {
+	c := pkg.ColorsPrint{}
+
+	c.Cyan("Assert Nil " + description)
+
+	if reflect.ValueOf(got).IsNil() {
+		c.Red(fmt.Sprint("\n\tI recibe nil value"))
+		t.Fail()
+		return
+	}
+
+	c.Green(fmt.Sprint("\n\tI recibe", got))
 }

@@ -16,7 +16,7 @@ type TestingInterface interface {
 type Before struct {
 	// Method. e.g. GET, POST, PUT, DELETE
 	Method string
-	// URL that you will testing. e.g. /api/videos
+	// URL e.g: /api/book/:id
 	URL string
 	// Body is the json that you will be send.
 	// e.g. { "name": "john" }
@@ -29,6 +29,8 @@ type Before struct {
 
 // Test is a struct about Testing execution
 type Test struct {
+	// URL e.g: /api/video/12abb553
+	URL string
 	// Controller that you would like to test
 	Controller func(*fiber.Ctx) error
 }
