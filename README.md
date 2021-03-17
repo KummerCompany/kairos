@@ -18,7 +18,7 @@ All repositories has interface `kairos.TestingInterface`. With this interface, y
 * `t`: *testing.T
 
 
-## Example
+## Example Description
 ```go
 
 import (
@@ -33,7 +33,7 @@ func TestAPI(t *testing.T) {
 	testAPI.Description("Testing GET API",
 		kairos.Before{
 			Method: "GET",
-			URL:    "/api/video/251252",
+			URL:    "/api/video/:id",
 			Body:   nil,
 			BeforeFunc: func(req *http.Request) {
 				controllers.Repo = repository.NewRepositoryStub(models.Video{
@@ -43,6 +43,7 @@ func TestAPI(t *testing.T) {
 		},
 		kairos.Test{
 			Controller: controllers.GetVideo,
+			URL: "/api/video/922202AAA"
 		},
 		kairos.After{
 			AfterFunc:  nil,
@@ -58,3 +59,30 @@ func TestAPI(t *testing.T) {
 	)
 }
 ```
+### Example Assert
+```go
+
+import (
+	"github.com/KummerCompany/kairos"
+	"github.com/KummerCompany/kairos/assert"
+	)
+
+func TestAPI(t *testing.T) {
+
+	want := 1
+	got := DivisionNumer(2,2)
+
+	assert.Equal(want, got, "Testing AddNumber", t)
+	assert.IsNotNil(got, "Division without n/0 return a number", t)
+
+	want := nil
+	got := DivisionNumer(0,0)
+
+	assert.IsNil(got, "0/0 return Nil", t)
+
+}
+
+```
+
+### Pkg
+Module to print with colors
