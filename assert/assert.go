@@ -14,17 +14,10 @@ func Equal(got, want interface{}, description string, t *testing.T) {
 
 	c.Cyan("Assert Equal " + description)
 
-	typeGot := reflect.TypeOf(got)
-	typeWant := reflect.TypeOf(want)
+	valueGot := reflect.ValueOf(got)
+	valueWant := reflect.ValueOf(want)
 
-	if typeGot != typeWant {
-		c.Red(fmt.Sprint("\n\tI recibe", typeGot))
-		c.Red(fmt.Sprint("\n\tBut I want", typeWant))
-		t.Fail()
-		return
-	}
-
-	if want != got {
+	if valueWant != valueGot {
 		c.Red(fmt.Sprint("\n\tI recibe", got))
 		c.Red(fmt.Sprint("\n\tBut I want", want))
 		t.Fail()
@@ -34,7 +27,7 @@ func Equal(got, want interface{}, description string, t *testing.T) {
 	c.Green(fmt.Sprint("\n\t I recibe ", want))
 }
 
-func isNil(got interface{}, description string, t *testing.T) {
+func IsNil(got interface{}, description string, t *testing.T) {
 	c := pkg.ColorsPrint{}
 
 	c.Cyan("Assert Nil " + description)
@@ -48,7 +41,7 @@ func isNil(got interface{}, description string, t *testing.T) {
 	c.Green("\n\t I recibe a nil value")
 }
 
-func isNotNil(got interface{}, description string, t *testing.T) {
+func IsNotNil(got interface{}, description string, t *testing.T) {
 	c := pkg.ColorsPrint{}
 
 	c.Cyan("Assert Nil " + description)
